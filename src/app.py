@@ -4,7 +4,7 @@ import streamlit as st
 from planner import plan
 from executor import (
     execute,
-    execute_with_search,
+    execute_with_google_search,
     is_low_confidence,
     ask_about_uploaded_policy
 )
@@ -47,7 +47,7 @@ if st.button("Get Help"):
                     st.markdown("### ✅ Agent Answer:")
             else:
                 st.info("Looks like a very specific question — using web search...")
-                response = execute_with_search(user_input)
+                response = execute_with_google_search(user_input)
                 st.markdown("### 🌐 Web-augmented Answer:")
 
         st.write(response, unsafe_allow_html=True)
