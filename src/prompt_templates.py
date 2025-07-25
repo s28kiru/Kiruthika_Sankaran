@@ -41,3 +41,19 @@ Generate a numbered, step-by-step guide:
 
 Write calmly and clearly, as if guiding someone in a stressful moment.
 """
+
+def summarize_policy_text(text: str) -> str:
+    return f"""
+You are an insurance expert assistant.
+
+A user has pasted the following part of their insurance policy:
+
+\"\"\"{text}\"\"\"
+
+Summarize this in plain English. Include:
+- What is covered
+- What is excluded or limited
+- Any confusing terms with simple explanations
+
+Be clear, brief, and helpful.
+"""
