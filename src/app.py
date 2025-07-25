@@ -42,6 +42,25 @@ uploaded_file = st.file_uploader("Upload your insurance policy (PDF or TXT)", ty
 policy_question = st.text_input("Ask a question about this document", placeholder="e.g., Does it cover ambulance services?")
 
 if st.button("Ask About Uploaded Policy"):
+    from utils import extract_text_from_pdf
+from executor import ask_about_uploaded_policy
+
+# Read and extract text
+if uploaded_file.type == "application/pdf":
+    policy_text = extract_text_from_pdf(uploaded_file)
+elif uploaded_file.type == "text/plain":
+    policy_text = uploaded_file.read().decode("utf-8")
+else:
+    st.error("Unsupported file type")
+    return
+
+# Get Gemini answer
+result = ask_about_uploaded_policy(policy_text, policy_question)
+
+st.markdown("### 📋 Answer Based on Uploaded Policy:")
+st.write(result)
+
+
     if not uploaded_file or not policy_question.strip():
         st.warning("Please upload a file and ask a question.")
     else:
