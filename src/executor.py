@@ -1,9 +1,20 @@
-from prompt_templates import qa_prompt, glossary_prompt, step_guide_prompt, summarize_policy_prompt, ask_policy_question_prompt
 from config import configure_gemini
+from prompt_templates import (
+    qa_prompt,
+    glossary_prompt,
+    step_guide_prompt,
+    summarize_policy_prompt,
+    ask_policy_question_prompt,
+    search_augmented_prompt
+)
+from google_search import search_google_cse
 
-# Set up the model
+# Set up Gemini model
 model = configure_gemini()
 
+# ----------------------------
+# Main executor for known intents
+# ----------------------------
 def execute(intent: str, goal: str) -> str:
     if intent == "qa":
         prompt = qa_prompt(goal)
@@ -16,14 +27,15 @@ def execute(intent: str, goal: str) -> str:
     else:
         return "Sorry, I didn't understand your request."
 
-    # Call Gemini and get the response
     try:
         response = model.generate_content(prompt)
         return response.text.strip()
     except Exception as e:
         return f"❌ Gemini API error: {str(e)}"
 
-
+# ----------------------------
+# For uploaded policy + user question
+# ----------------------------
 def ask_about_uploaded_policy(policy_text: str, user_question: str) -> str:
     prompt = ask_policy_question_prompt(policy_text, user_question)
     try:
@@ -32,3 +44,34 @@ def ask_about_uploaded_policy(policy_text: str, user_question: str) -> str:
     except Exception as e:
         return f"❌ Gemini API error: {str(e)}"
 
+# ----------------------------
+# Google CSE + Gemini fallback
+# ----------------------------
+def execute_with_search(question: str) -> str:
+    search_results = search_google_cse(question)
+
+    if not search_results or "⚠️" in search_results[0]:
+        return "\n".join(search_results)
+
+    prompt = search_augmented_prompt(question, search_results)
+    try:
+        response = model.generate_content(prompt)
+        return response.text.strip()
+    except Exception as e:
+        return f"❌ Gemini API error: {str(e)}"
+
+# ----------------------------
+# Confidence checker utility
+# ----------------------------
+def is_low_confidence(response_text: str) -> bool:
+    vague_phrases = [
+        "depends on your plan",
+        "you should contact your insurer",
+        "may vary",
+        "not sure",
+        "unclear",
+        "check with your provider",
+        "cannot determine",
+        "it is recommended to"
+    ]
+    return any(phrase in response_text.lower() for phrase in vague_phrases)
