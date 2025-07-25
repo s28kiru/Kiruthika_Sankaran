@@ -47,7 +47,7 @@ def ask_about_uploaded_policy(policy_text: str, user_question: str) -> str:
 # ----------------------------
 # Google CSE + Gemini fallback
 # ----------------------------
-def execute_with_search(question: str) -> str:
+def execute_with_google_search(question: str) -> str:
     search_results = search_google_cse(question)
 
     if not search_results or "⚠️" in search_results[0]:
