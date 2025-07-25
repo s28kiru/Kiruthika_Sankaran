@@ -63,3 +63,21 @@ Summarize it like this:
 
 Keep it brief and skimmable. Avoid legal wording or repetition.
 """
+
+def ask_policy_question_prompt(policy_text: str, question: str) -> str:
+    return f"""
+You're a smart insurance assistant.
+
+The user uploaded the following policy text:
+\"\"\"{policy_text[:8000]}\"\"\"
+
+They want to know: "{question}"
+
+Answer in plain English. Include:
+- Whether this is covered or not
+- What part of the policy supports the answer (if relevant)
+- A short explanation
+
+Do not summarize the whole policy. Just answer the question in context.
+"""
+
