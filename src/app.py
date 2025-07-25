@@ -35,3 +35,17 @@ if st.button("Get Help"):
         st.markdown("### ✅ Here's what I found:")
         st.write(result)
 
+st.markdown("---")
+st.markdown("### 📁 Ask a question about a full policy document")
+
+uploaded_file = st.file_uploader("Upload your insurance policy (PDF or TXT)", type=["pdf", "txt"])
+policy_question = st.text_input("Ask a question about this document", placeholder="e.g., Does it cover ambulance services?")
+
+if st.button("Ask About Uploaded Policy"):
+    if not uploaded_file or not policy_question.strip():
+        st.warning("Please upload a file and ask a question.")
+    else:
+        with st.spinner("Reading your policy and analyzing..."):
+            # Placeholder for content extraction + Gemini call
+
+
