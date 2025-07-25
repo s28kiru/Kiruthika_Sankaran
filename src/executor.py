@@ -1,4 +1,4 @@
-from prompt_templates import qa_prompt, glossary_prompt, step_guide_prompt, summarize_policy_prompt
+from prompt_templates import qa_prompt, glossary_prompt, step_guide_prompt, summarize_policy_prompt, ask_policy_question_prompt
 from config import configure_gemini
 
 # Set up the model
@@ -22,3 +22,13 @@ def execute(intent: str, goal: str) -> str:
         return response.text.strip()
     except Exception as e:
         return f"❌ Gemini API error: {str(e)}"
+
+
+def ask_about_uploaded_policy(policy_text: str, user_question: str) -> str:
+    prompt = ask_policy_question_prompt(policy_text, user_question)
+    try:
+        response = model.generate_content(prompt)
+        return response.text.strip()
+    except Exception as e:
+        return f"❌ Gemini API error: {str(e)}"
+
