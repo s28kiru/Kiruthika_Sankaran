@@ -1,4 +1,4 @@
-from prompt_templates import qa_prompt, glossary_prompt, step_guide_prompt
+from prompt_templates import qa_prompt, glossary_prompt, step_guide_prompt, summarize_policy_prompt
 from config import configure_gemini
 
 # Set up the model
