@@ -81,3 +81,15 @@ Answer in plain English. Include:
 Do not summarize the whole policy. Just answer the question in context.
 """
 
+def search_augmented_prompt(question: str, search_results: list) -> str:
+    sources = "\n\n".join(search_results)
+    return f"""
+You are an insurance assistant answering this user's question using recent Google search results.
+
+User's question: "{question}"
+
+Here are relevant web results:
+{sources}
+
+Respond clearly in plain English. Keep it under 200 words. Be factual, cite if needed, and avoid guessing.
+"""
