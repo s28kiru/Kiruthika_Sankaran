@@ -8,6 +8,8 @@ from prompt_templates import (
     search_augmented_prompt
 )
 from google_search import search_google_cse
+from memory import get_memory_context
+
 
 # Set up Gemini model
 model = configure_gemini()
@@ -26,6 +28,20 @@ def execute(intent: str, goal: str) -> str:
         prompt = summarize_policy_prompt(goal)
     else:
         return "Sorry, I didn't understand your request."
+
+    # Prepend memory context if available
+    if memory_context:
+        prompt = f"""
+Here’s what the user has previously discussed with you:
+
+{memory_context}
+
+Now, address the following new question:
+
+{base_prompt}
+"""
+    else:
+        prompt = base_prompt
 
     try:
         response = model.generate_content(prompt)
