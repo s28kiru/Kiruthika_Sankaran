@@ -2,7 +2,8 @@
 
 import streamlit as st
 from planner import plan
-from executor import execute
+from executor import execute, ask_about_uploaded_policy
+from utils import extract_text_from_pdf
 
 st.set_page_config(page_title="🛡️ InsureMate", layout="centered")
 
@@ -35,6 +36,7 @@ if st.button("Get Help"):
         st.markdown("### ✅ Here's what I found:")
         st.write(result)
 
+# --- Document Upload Section ---
 st.markdown("---")
 st.markdown("### 📁 Ask a question about a full policy document")
 
@@ -42,29 +44,21 @@ uploaded_file = st.file_uploader("Upload your insurance policy (PDF or TXT)", ty
 policy_question = st.text_input("Ask a question about this document", placeholder="e.g., Does it cover ambulance services?")
 
 if st.button("Ask About Uploaded Policy"):
-    from utils import extract_text_from_pdf
-from executor import ask_about_uploaded_policy
-
-# Read and extract text
-if uploaded_file.type == "application/pdf":
-    policy_text = extract_text_from_pdf(uploaded_file)
-elif uploaded_file.type == "text/plain":
-    policy_text = uploaded_file.read().decode("utf-8")
-else:
-    st.error("Unsupported file type")
-    return
-
-# Get Gemini answer
-result = ask_about_uploaded_policy(policy_text, policy_question)
-
-st.markdown("### 📋 Answer Based on Uploaded Policy:")
-st.write(result)
-
-
     if not uploaded_file or not policy_question.strip():
         st.warning("Please upload a file and ask a question.")
     else:
         with st.spinner("Reading your policy and analyzing..."):
-            # Placeholder for content extraction + Gemini call
+            # Read and extract text
+            if uploaded_file.type == "application/pdf":
+                policy_text = extract_text_from_pdf(uploaded_file)
+            elif uploaded_file.type == "text/plain":
+                policy_text = uploaded_file.read().decode("utf-8")
+            else:
+                st.error("Unsupported file type")
+                policy_text = ""
 
+            if policy_text:
+                result = ask_about_uploaded_policy(policy_text, policy_question)
+                st.markdown("### 📋 Answer Based on Uploaded Policy:")
+                st.write(result)
 
