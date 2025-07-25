@@ -2,9 +2,15 @@
 
 import streamlit as st
 from planner import plan
-from executor import execute, ask_about_uploaded_policy
+from executor import (
+    execute,
+    execute_with_search,
+    is_low_confidence,
+    ask_about_uploaded_policy
+)
 from utils import extract_text_from_pdf
 
+# ---- App Config ----
 st.set_page_config(page_title="🛡️ InsureMate", layout="centered")
 
 st.title("🛡️ InsureMate: Your AI Insurance Copilot")
@@ -13,30 +19,40 @@ st.markdown(
     "I'll help you understand what's covered, what steps to take, and clarify confusing terms."
 )
 
-# User input box
+# ---- User Input ----
 user_input = st.text_area(
     "Enter your insurance question or scenario below:",
     placeholder="e.g., I got into a car accident. What do I do?",
     height=150
 )
 
-# Submit button
+# ---- Submit Button ----
 if st.button("Get Help"):
     if not user_input.strip():
         st.warning("Please enter a question.")
     else:
         with st.spinner("Analyzing your request..."):
-            # Step 1: Plan the task
             plan_result = plan(user_input)
+            intent = plan_result["intent"]
+            goal = plan_result["goal"]
 
-            # Step 2: Run executor
-            result = execute(plan_result["intent"], plan_result["goal"])
+            if intent in ["qa", "glossary", "step_guide", "summarize_policy"]:
+                response = execute(intent, goal)
 
-        # Step 3: Display result
-        st.markdown("### ✅ Here's what I found:")
-        st.write(result, unsafe_allow_html=True)
+                if is_low_confidence(response):
+                    st.info("The AI wasn't confident — checking the web for better info...")
+                    response = execute_with_search(user_input)
+                    st.markdown("### 🌐 Web-augmented Answer (Fallback):")
+                else:
+                    st.markdown("### ✅ Agent Answer:")
+            else:
+                st.info("Looks like a very specific question — using web search...")
+                response = execute_with_search(user_input)
+                st.markdown("### 🌐 Web-augmented Answer:")
 
-# --- Document Upload Section ---
+        st.write(response, unsafe_allow_html=True)
+
+# ---- Document Upload Section ----
 st.markdown("---")
 st.markdown("### 📁 Ask a question about a full policy document")
 
