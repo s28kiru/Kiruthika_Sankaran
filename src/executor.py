@@ -12,7 +12,7 @@ def execute(intent: str, goal: str) -> str:
     elif intent == "step_guide":
         prompt = step_guide_prompt(goal)
     elif intent == "summarize_policy":
-        prompt = summarize_policy_text(goal)
+        prompt = summarize_policy_prompt(goal)
     else:
         return "Sorry, I didn't understand your request."
 
