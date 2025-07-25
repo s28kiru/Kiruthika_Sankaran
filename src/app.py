@@ -34,7 +34,7 @@ if st.button("Get Help"):
 
         # Step 3: Display result
         st.markdown("### ✅ Here's what I found:")
-        st.write(result)
+        st.write(result, unsafe_allow_html=True)
 
 # --- Document Upload Section ---
 st.markdown("---")
@@ -60,5 +60,5 @@ if st.button("Ask About Uploaded Policy"):
             if policy_text:
                 result = ask_about_uploaded_policy(policy_text, policy_question)
                 st.markdown("### 📋 Answer Based on Uploaded Policy:")
-                st.write(result)
+                st.write(result, unsafe_allow_html=True)
 
