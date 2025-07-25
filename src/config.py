@@ -11,4 +11,4 @@ def configure_gemini():
     genai.configure(api_key=api_key)
 
     # Return Gemini Pro model
-    return genai.GenerativeModel("models/gemini-pro")
+    return genai.GenerativeModel("gemini-1.5-pro")
