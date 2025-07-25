@@ -37,8 +37,19 @@ def plan(user_input: str) -> dict:
             "goal": user_input.strip()
         }
 
-    # Fallback: General insurance Q&A
+    # General insurance-related Q&A
+    qa_keywords = [
+        "covered", "coverage", "claim", "copay", "deductible", "premium", 
+        "limit", "eligibility", "network", "coinsurance"
+    ]
+    if any(kw in input_lower for kw in qa_keywords):
+        return {
+            "intent": "qa",
+            "goal": user_input.strip()
+        }
+
+    # Fallback: too specific or unfamiliar → send to external search
     return {
-        "intent": "qa",
+        "intent": "external_search",
         "goal": user_input.strip()
     }
