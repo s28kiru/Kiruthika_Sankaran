@@ -46,7 +46,7 @@ Generate a numbered, step-by-step guide:
 Write calmly and clearly, as if guiding someone in a stressful moment.
 """
 
-def summarize_policy_text(text: str) -> str:
+def summarize_policy_prompt(text: str) -> str:
     return f"""
 You are an insurance expert assistant.
 
