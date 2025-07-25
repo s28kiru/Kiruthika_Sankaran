@@ -9,9 +9,13 @@ from executor import (
     ask_about_uploaded_policy
 )
 from utils import extract_text_from_pdf
+from memory import init_memory, log_memory
+
 
 # ---- App Config ----
 st.set_page_config(page_title="🛡️ InsureMate", layout="centered")
+init_memory()
+
 
 st.title("🛡️ InsureMate: Your AI Insurance Copilot")
 st.markdown(
@@ -51,6 +55,8 @@ if st.button("Get Help"):
                 st.markdown("### 🌐 Web-augmented Answer:")
 
         st.write(response, unsafe_allow_html=True)
+        log_memory(user_input, result)
+
 
 # ---- Document Upload Section ----
 st.markdown("---")
