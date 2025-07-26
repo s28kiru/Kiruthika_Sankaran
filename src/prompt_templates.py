@@ -93,3 +93,21 @@ Here are relevant web results:
 
 Respond clearly in plain English. Keep it under 200 words. Be factual, cite if needed, and avoid guessing.
 """
+
+def call_script_prompt(goal: str) -> str:
+    return f"""
+You are an expert insurance guide.
+
+The user wants help **talking to their insurance company** about the following:
+
+\"\"\"{goal}\"\"\"
+
+Generate a friendly phone script they can use. Include:
+- A polite greeting and context
+- The key question or request to ask
+- Optional follow-ups they can include
+- Keep it brief (4–6 lines), natural and confident
+
+Avoid legal jargon. Make it sound like something a real person would say.
+"""
+
