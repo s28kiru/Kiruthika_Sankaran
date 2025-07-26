@@ -1,77 +1,64 @@
-# InsureMate
+# 🛡️ InsureMate — Your AI-Powered Insurance Navigator
 
-# 🛡️ InsureMate: Your AI-Powered Insurance Navigator
-
-**InsureMate** is an intelligent agent designed to help users navigate the complex world of insurance. Whether it's understanding policy terms, finding suitable coverage, or knowing what to say to insurers, InsureMate offers clear, accurate, and context-aware assistance.
-
-App URL - https://kiruthikasankaran-insuremate-agent.streamlit.app/
+**InsureMate** is a conversational insurance assistant that helps users understand policies, define confusing terms, generate insurer call scripts, summarize documents, and get real-time answers using AI + web search — all through a clean Streamlit UI.
 
 ---
 
-## 🚀 Features
+## 🚀 Live Demo
 
-- Natural language Q&A for insurance questions
-- Coverage comparison and glossary explanations
-- Policy summarization and call script generation
-- Memory-aware and context-sensitive replies
-- Google search-augmented intelligence (via CSE)
+Try it now →  
+**🔗 https://kiruthikasankaran-insuremate-agent.streamlit.app/**
 
----
-
-## 🧰 Tech Stack
-
-- **Python 3.10+**
-- **Gemini API** (via `google.generativeai`)
-- **Google Programmable Search Engine (CSE)**
-- **streamlit**
-- Local Memory Context
+> ✅ Deployed using [Streamlit Cloud](https://streamlit.io/cloud)  
+> ✅ No local setup required  
+> 🔐 Secrets (API keys) securely managed via Streamlit Secrets
 
 ---
 
-## 📦 Dependencies
+## 🧰 Features
 
-Install all required dependencies with:
+- 💬 Ask insurance-related questions in plain English  
+- 📖 Define terms like deductible, copay, coinsurance  
+- 📄 Upload and summarize insurance policies  
+- 📞 Generate call scripts for tricky situations like denial or appeal  
+- 🌐 Get real-time answers using Google search  
+- 🧠 Session memory helps maintain context in follow-up questions  
 
-```bash
-pip install -r requirements.txt
+---
+
+## ⚙️ How It Was Set Up (No Local Install Needed)
+
+1. Code pushed to **GitHub**
+2. Connected GitHub repo to **Streamlit Cloud**
+3. Added required API keys in **Streamlit → App → Settings → Secrets**
+4. Streamlit auto-deployed and hosted the app
+
+---
+
+## 🔐 Required Secrets
+
+Set these in Streamlit under **App → Settings → Secrets**:
+
+```toml
+GOOGLE_API_KEY = "your_google_generative_ai_key"
+CSE_API_KEY = "your_google_custom_search_api_key"
+CSE_ID = "your_custom_search_engine_id"
 ```
 
-GOOGLE_API_KEY=your_google_api_key_here
-GEMINI_API_KEY-your_gemini_api_key
-GOOGLE_CSE_ID=your_google_custom_search_engine_id
+* GOOGLE_API_KEY: Get from https://makersuite.google.com/app/apikey
 
+* CSE_API_KEY + CSE_ID: Get from https://programmablesearchengine.google.com
 
-## 📋 Submission Checklist
+## Project Structure
 
-- [ ] All code in `src/` runs without errors  
-- [ ] `ARCHITECTURE.md` contains a clear diagram sketch and explanation  
-- [ ] `EXPLANATION.md` covers planning, tool use, memory, and limitations  
-- [ ] `DEMO.md` links to a 3–5 min video with timestamped highlights  
-
-
-## 🚀 Getting Started
-
-1. **Clone / Fork** this template.  Very Important. Fork Name MUST be the same name as the teamn name
-
-
-## 📂 Folder Layout
-
-![Folder Layout Diagram](images/folder-githb.png)
-
-
-
-## 🏅 Judging Criteria
-
-- **Technical Excellence **  
-  This criterion evaluates the robustness, functionality, and overall quality of the technical implementation. Judges will assess the code's efficiency, the absence of critical bugs, and the successful execution of the project's core features.
-
-- **Solution Architecture & Documentation **  
-  This focuses on the clarity, maintainability, and thoughtful design of the project's architecture. This includes assessing the organization and readability of the codebase, as well as the comprehensiveness and conciseness of documentation (e.g., GitHub README, inline comments) that enables others to understand and potentially reproduce or extend the solution.
-
-- **Innovative Gemini Integration **  
-  This criterion specifically assesses how effectively and creatively the Google Gemini API has been incorporated into the solution. Judges will look for novel applications, efficient use of Gemini's capabilities, and the impact it has on the project's functionality or user experience. You are welcome to use additional Google products.
-
-- **Societal Impact & Novelty **  
-  This evaluates the project's potential to address a meaningful problem, contribute positively to society, or offer a genuinely innovative and unique solution. Judges will consider the originality of the idea, its potential real‑world applicability, and its ability to solve a challenge in a new or impactful way.
-
-
+insuremate/
+├── app.py                # Streamlit UI
+├── config.py             # Gemini config + secrets
+├── executor.py           # Task execution logic
+├── planner.py            # Maps user input to intent
+├── prompt_templates.py   # Prompt templates
+├── memory.py             # Session-based memory
+├── google_search.py      # Google CSE integration
+├── utils.py              # Helper functions
+├── requirements.txt
+└── .streamlit/secrets.toml (managed in Streamlit UI)
