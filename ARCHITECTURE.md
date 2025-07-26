@@ -11,8 +11,7 @@ Below, sketch (ASCII, hand-drawn JPEG/PNG pasted in, or ASCII art) the high-leve
    - Streamlit 
 
 2. **Agent Core**
-   - 
-   - **Planner**:   
+   - **Planner**: Definition, scenario & next steps, conversation, general Q&A (Search API), Summarize given text  
    - **Executor**: LLM prompt + tool-calling logic  
    - **Memory**: logs  
 
@@ -26,5 +25,5 @@ Below, sketch (ASCII, hand-drawn JPEG/PNG pasted in, or ASCII art) the high-leve
    - Error handling / retries
    - Handle vague search results
 
-![Alt text](architecture.png) 
+![Alt text](images/architecture.png) 
 
