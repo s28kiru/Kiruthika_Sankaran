@@ -8,17 +8,23 @@ Below, sketch (ASCII, hand-drawn JPEG/PNG pasted in, or ASCII art) the high-leve
 ## Components
 
 1. **User Interface**  
-   - E.g., Streamlit, CLI, Slack bot  
+   - Streamlit 
 
-2. **Agent Core**  
-   - **Planner**: how you break down tasks  
+2. **Agent Core**
+   - 
+   - **Planner**:   
    - **Executor**: LLM prompt + tool-calling logic  
-   - **Memory**: vector store, cache, or on-disk logs  
+   - **Memory**: logs  
 
 3. **Tools / APIs**  
-   - E.g., Google Gemini API, Tools, etc
+   - Google Gemini API
+   - Google Search API & Google CSE (Programmable search engine)
+
 
 4. **Observability**  
-   - Logging of each reasoning step  
-   - Error handling / retries  
+   - Logging of each reasoning step upto 5 historic messages 
+   - Error handling / retries
+   - Handle vague search results
+
+![Alt text](architecture.png) 
 
