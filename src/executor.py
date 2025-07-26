@@ -5,7 +5,8 @@ from prompt_templates import (
     step_guide_prompt,
     summarize_policy_prompt,
     ask_policy_question_prompt,
-    search_augmented_prompt
+    search_augmented_prompt,
+    call_script_prompt
 )
 from google_search import search_google_cse
 from memory import get_memory_context
@@ -27,6 +28,8 @@ def execute(intent: str, goal: str) -> str:
         base_prompt = step_guide_prompt(goal)
     elif intent == "summarize_policy":
         base_prompt = summarize_policy_prompt(goal)
+    elif intent == "call_script":
+        base_prompt = call_script_prompt(goal)
     else:
         return "Sorry, I didn't understand your request."
 
