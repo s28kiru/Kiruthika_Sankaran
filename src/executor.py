@@ -18,6 +18,7 @@ model = configure_gemini()
 # Main executor for known intents
 # ----------------------------
 def execute(intent: str, goal: str) -> str:
+    memory_context = get_memory_context()
     if intent == "qa":
         prompt = qa_prompt(goal)
     elif intent == "glossary":
