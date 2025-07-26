@@ -48,6 +48,17 @@ def plan(user_input: str) -> dict:
             "goal": user_input.strip()
         }
 
+    call_keywords = [
+    "what should i say", "how do i ask", "script for", 
+    "talk to insurer", "call my insurance", "ask them", "appeal a denial"]
+    
+    if any(kw in input_lower for kw in call_keywords):
+        return {
+            "intent": "call_script",
+            "goal": user_input.strip()
+        }
+
+
     # Fallback: too specific or unfamiliar → send to external search
     return {
         "intent": "external_search",
