@@ -20,13 +20,13 @@ model = configure_gemini()
 def execute(intent: str, goal: str) -> str:
     memory_context = get_memory_context()
     if intent == "qa":
-        prompt = qa_prompt(goal)
+        base_prompt = qa_prompt(goal)
     elif intent == "glossary":
-        prompt = glossary_prompt(goal)
+        base_prompt = glossary_prompt(goal)
     elif intent == "step_guide":
-        prompt = step_guide_prompt(goal)
+        base_prompt = step_guide_prompt(goal)
     elif intent == "summarize_policy":
-        prompt = summarize_policy_prompt(goal)
+        base_prompt = summarize_policy_prompt(goal)
     else:
         return "Sorry, I didn't understand your request."
 
