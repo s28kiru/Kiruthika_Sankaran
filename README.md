@@ -36,6 +36,11 @@ Install all required dependencies with:
 pip install -r requirements.txt
 ```
 
+GOOGLE_API_KEY=your_google_api_key_here
+GEMINI_API_KEY-your_gemini_api_key
+GOOGLE_CSE_ID=your_google_custom_search_engine_id
+
+
 ## 📋 Submission Checklist
 
 - [ ] All code in `src/` runs without errors  
