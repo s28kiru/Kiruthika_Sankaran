@@ -1,10 +1,40 @@
-# Agentic AI App Hackathon Template
+# InsureMate
 
-Welcome! This repository is your starting point for the **Agentic AI App Hackathon**. It includes:
+# 🛡️ InsureMate: Your AI-Powered Insurance Navigator
 
-- A consistent folder structure  
-- An environment spec (`environment.yml` or `Dockerfile`)  
-- Documentation placeholders to explain your design and demo
+**InsureMate** is an intelligent agent designed to help users navigate the complex world of insurance. Whether it's understanding policy terms, finding suitable coverage, or knowing what to say to insurers, InsureMate offers clear, accurate, and context-aware assistance.
+
+App URL - https://kiruthikasankaran-insuremate-agent.streamlit.app/
+
+---
+
+## 🚀 Features
+
+- Natural language Q&A for insurance questions
+- Coverage comparison and glossary explanations
+- Policy summarization and call script generation
+- Memory-aware and context-sensitive replies
+- Google search-augmented intelligence (via CSE)
+
+---
+
+## 🧰 Tech Stack
+
+- **Python 3.10+**
+- **Gemini API** (via `google.generativeai`)
+- **Google Programmable Search Engine (CSE)**
+- **streamlit**
+- Local Memory Context
+
+---
+
+## 📦 Dependencies
+
+Install all required dependencies with:
+
+```bash
+pip install -r requirements.txt
+```
 
 ## 📋 Submission Checklist
 
