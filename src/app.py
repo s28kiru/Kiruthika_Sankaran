@@ -55,7 +55,7 @@ if st.button("Get Help"):
                 st.markdown("### 🌐 Web-augmented Answer:")
 
         st.write(response, unsafe_allow_html=True)
-        log_memory(user_input, result)
+        log_memory(user_input, response)
 
 
 # ---- Document Upload Section ----
