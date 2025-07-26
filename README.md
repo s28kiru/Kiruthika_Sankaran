@@ -51,14 +51,16 @@ CSE_ID = "your_custom_search_engine_id"
 
 ## Project Structure
 
-insuremate/
-├── app.py                # Streamlit UI
-├── config.py             # Gemini config + secrets
-├── executor.py           # Task execution logic
+src/
+├── app.py                # Streamlit app frontend
+├── config.py             # Gemini and secrets loader
+├── executor.py           # Task executor logic
 ├── planner.py            # Maps user input to intent
-├── prompt_templates.py   # Prompt templates
-├── memory.py             # Session-based memory
+├── prompt_templates.py   # Prompt generator functions
+├── memory.py             # Session memory logic
 ├── google_search.py      # Google CSE integration
-├── utils.py              # Helper functions
-├── requirements.txt
-└── .streamlit/secrets.toml (managed in Streamlit UI)
+├── utils.py              # Formatters and helpers
+├── requirements.txt      # Python dependencies
+└── .streamlit/
+    └── secrets.toml      # (set in Streamlit Cloud UI, not stored in GitHub)
+
